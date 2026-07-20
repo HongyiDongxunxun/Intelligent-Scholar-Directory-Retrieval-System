@@ -1,0 +1,25 @@
+{
+  "dataset_id": "synthetic-fixture-v1",
+  "mode": "SYNTHETIC",
+  "generated_at_runtime": true,
+  "source_dataset_used": false,
+  "counts": {
+    "publications": 60,
+    "scholars": 40,
+    "institutions": 20
+  },
+  "time_range": [2014, 2025],
+  "topics": ["知识组织", "数字人文", "学术评价", "知识图谱", "公共文化", "智能目录"],
+  "identifiers": {
+    "publication": "P001-P060",
+    "scholar": "A001-A040",
+    "institution": "U01-U08 and D01-D12"
+  },
+  "confidentiality": {
+    "contains_real_people": false,
+    "contains_real_institutions": false,
+    "contains_original_database_rows": false,
+    "contains_credentials": false
+  },
+  "generator": "backend/src/main/java/org/scholar/directory/data/FixtureCatalog.java"
+}

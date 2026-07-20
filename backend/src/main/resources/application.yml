@@ -1,0 +1,20 @@
+server:
+  port: ${SERVER_PORT:8091}
+
+spring:
+  application:
+    name: scholar-directory-reconstruction
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+app:
+  data-version: synthetic-fixture-v1
+  algorithm-version: topic-score-v1
+  ai-parser-version: deterministic-parser-v1

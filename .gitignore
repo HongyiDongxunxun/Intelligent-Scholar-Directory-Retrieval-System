@@ -1,0 +1,13 @@
+backend/target/
+frontend/node_modules/
+frontend/dist/
+run/
+experiments/results/*
+!experiments/results/published/
+!experiments/results/published/**
+*.log
+.idea/
+.vscode/
+.DS_Store
+__pycache__/
+*.py[cod]

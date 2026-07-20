@@ -1,0 +1,8 @@
+{
+  "datasetId": "synthetic-fixture-v1",
+  "counts": {
+    "publications": 60,
+    "scholars": 40,
+    "institutions": 20
+  }
+}

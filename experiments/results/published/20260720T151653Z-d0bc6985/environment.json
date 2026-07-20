@@ -1,0 +1,15 @@
+{
+  "runId": "20260720T151653Z-d0bc6985",
+  "baseUrl": "http://127.0.0.1:8091",
+  "utcTime": "2026-07-20T15:16:53.640662+00:00",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+  "cpuCount": 32,
+  "indexStatus": {
+    "indexDocumentCount": 60,
+    "dataMode": "SYNTHETIC",
+    "databasePublicationCount": 60,
+    "indexVersion": "fixture-index-v1",
+    "consistent": true
+  }
+}

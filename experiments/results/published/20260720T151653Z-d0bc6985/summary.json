@@ -1,0 +1,88 @@
+{
+  "runId": "20260720T151653Z-d0bc6985",
+  "status": "PASS",
+  "scope": "Synthetic functional, auditability, and local performance verification",
+  "e1": {
+    "知识组织": {
+      "candidatePublications": 10,
+      "returned": {
+        "papers": 10,
+        "scholars": 20,
+        "institutions": 8,
+        "keywords": 9
+      },
+      "graph": {
+        "nodes": 20,
+        "links": 41
+      },
+      "formulaCheck": true,
+      "rangeCheck": true
+    },
+    "数字人文": {
+      "candidatePublications": 10,
+      "returned": {
+        "papers": 10,
+        "scholars": 20,
+        "institutions": 8,
+        "keywords": 9
+      },
+      "graph": {
+        "nodes": 20,
+        "links": 38
+      },
+      "formulaCheck": true,
+      "rangeCheck": true
+    }
+  },
+  "e2": {
+    "parserConfigVersion": "deterministic-parser-v1",
+    "parseStableAcrossThreeRuns": true,
+    "confirmTotals": [
+      4,
+      4,
+      4
+    ],
+    "confirmOrderStable": true,
+    "warnings": [
+      "SYNTHETIC_FIXTURE_ALIAS_APPLIED"
+    ]
+  },
+  "e3": {
+    "workers": 30,
+    "requestsPerScenario": 60,
+    "cacheSequence": {
+      "coldStatus": "MISS",
+      "coldMs": 18.064,
+      "warmStatus": "HIT",
+      "warmMs": 14.924,
+      "resultEquivalent": true
+    },
+    "publicationSearch": {
+      "requests": 60,
+      "successRate": 1.0,
+      "meanMs": 17.925,
+      "medianMs": 17.197,
+      "observedP95Ms": 28.183,
+      "maxMs": 32.759,
+      "rps": 1176.923
+    },
+    "scholarSearch": {
+      "requests": 60,
+      "successRate": 1.0,
+      "meanMs": 23.189,
+      "medianMs": 23.019,
+      "observedP95Ms": 31.968,
+      "maxMs": 33.698,
+      "rps": 999.757
+    },
+    "topicWarmCache": {
+      "requests": 60,
+      "successRate": 1.0,
+      "meanMs": 10.354,
+      "medianMs": 9.915,
+      "observedP95Ms": 14.758,
+      "maxMs": 18.91,
+      "rps": 1300.864
+    }
+  }
+}
