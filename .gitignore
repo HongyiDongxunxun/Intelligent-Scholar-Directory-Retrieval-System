@@ -11,3 +11,17 @@ experiments/results/*
 .DS_Store
 __pycache__/
 *.py[cod]
+
+# Never commit private plaintext, secrets, or environment-specific build files.
+*.sql
+.env
+.env.*
+**/application-local.*
+**/application-localdb.*
+**/application-experiment.*
+**/application-prod.*
+**/application-secret.*
+**/pom.private.xml
+private-materials/restored/
+private-materials/*.key
+private-materials/*.password

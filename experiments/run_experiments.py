@@ -185,7 +185,6 @@ def main():
         "warnings": parse_outputs[0]["warnings"],
     }
 
-    runner.call("POST", "/api/v1/system/cache/topic/clear", scenario="e3_cache_control")
     topic_perf_query = {
         "topic": "知识组织",
         "conditions": [{"operator": "AND", "field": "KEYWORD", "value": "知识组织", "match": "FUZZY"}],

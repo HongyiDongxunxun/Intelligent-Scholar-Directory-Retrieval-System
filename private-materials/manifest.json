@@ -1,0 +1,19 @@
+{
+  "format": "ISDENC01",
+  "bundle_file": "original-build-materials.isdenc",
+  "bundle_size_bytes": 34776,
+  "bundle_sha256": "6919517b4ba4a18f41d82a2ac5b2d77155ea5e8631f074f837f8c1c018ba75ce",
+  "cipher": "AES-256-GCM",
+  "authentication_tag_bits": 128,
+  "kdf": "PBKDF2-HMAC-SHA-256",
+  "kdf_iterations": 210000,
+  "encrypted_contents": [
+    "database/schema.sql",
+    "config/application.yml",
+    "config/application-experiment.yml",
+    "config/application-localdb.yml",
+    "build/pom.xml"
+  ],
+  "password_committed": false,
+  "required_for_public_build": false
+}

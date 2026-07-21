@@ -3,6 +3,7 @@ package org.scholar.directory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.scholar.directory.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,11 +21,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CoreApiIntegrationTest {
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper mapper;
+    @Autowired TopicService topics;
 
     @Test
     void syntheticIndexIsConsistentAndContainsNoOriginalDatabaseDependency() throws Exception {
         mvc.perform(get("/api/v1/system/index-status"))
                 .andExpect(status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header()
+                        .string("X-Content-Type-Options", "nosniff"))
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.data.consistent").value(true))
                 .andExpect(jsonPath("$.data.dataMode").value("SYNTHETIC"))
@@ -65,7 +69,7 @@ class CoreApiIntegrationTest {
                  "assembleTypes":["PUBLICATION","SCHOLAR","INSTITUTION","KEYWORD"],
                  "includeSubtopics":true,"includeGraph":true}
                 """;
-        mvc.perform(post("/api/v1/system/cache/topic/clear")).andExpect(status().isOk());
+        topics.clearCache();
         String first = mvc.perform(post("/api/v1/topics/assemble").contentType(MediaType.APPLICATION_JSON).content(body))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.data.cacheStatus").value("MISS"))
                 .andReturn().getResponse().getContentAsString();
@@ -96,5 +100,13 @@ class CoreApiIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON).content(confirm))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.items").isArray());
+    }
+
+    @Test
+    void legacyAndAdministrativeApiSurfacesAreNotExposedByDefault() throws Exception {
+        mvc.perform(post("/api/search/searchArticle").contentType(MediaType.APPLICATION_JSON).content("{}"))
+                .andExpect(status().isNotFound());
+        mvc.perform(post("/api/v1/system/cache/topic/clear"))
+                .andExpect(status().isNotFound());
     }
 }

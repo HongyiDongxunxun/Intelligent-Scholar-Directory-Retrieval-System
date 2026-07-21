@@ -4,3 +4,4 @@
 data/reviewer_data_public/** text eol=lf
 *.zip binary
 *.png binary
+*.isdenc binary

@@ -5,11 +5,13 @@ import org.scholar.directory.api.Requests;
 import org.scholar.directory.service.AiParserService;
 import org.scholar.directory.service.SearchService;
 import org.scholar.directory.service.TopicService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @RestController
+@ConditionalOnProperty(name = "app.legacy-api-enabled", havingValue = "true")
 public class LegacyController {
     private final SearchService search;
     private final TopicService topics;
@@ -36,9 +38,11 @@ public class LegacyController {
     @PostMapping("/api/topicDiscovery/assemble")
     public Map<String, Object> topic(@RequestBody Map<String, Object> body) {
         Requests.TopicAssembly request = new Requests.TopicAssembly();
-        request.topic = string(body.get("topic"));
-        request.candidateLimit = integer(body.get("candidateLimit"), 500);
-        request.topSize = Math.max(integer(body.get("topPaperSize"), 10), integer(body.get("topKeywordSize"), 20));
+        request.topic = limitedString(body.get("topic"), 100, "topic");
+        request.candidateLimit = boundedInteger(body.get("candidateLimit"), 500, 1, 1000, "candidateLimit");
+        request.topSize = Math.max(
+                boundedInteger(body.get("topPaperSize"), 10, 1, 100, "topPaperSize"),
+                boundedInteger(body.get("topKeywordSize"), 20, 1, 100, "topKeywordSize"));
         request.includeGraph = bool(body.get("includeGraph"), false);
         request.includeSubtopics = bool(body.get("includeSubtopics"), true);
         return legacy(topics.assemble(request));
@@ -46,7 +50,7 @@ public class LegacyController {
 
     @PostMapping("/api/aiSearch/parseRequest")
     public Map<String, Object> parseArticle(@RequestBody Map<String, Object> body) {
-        Map<String, Object> parsed = ai.parseArticle(string(body.get("originRequest")));
+        Map<String, Object> parsed = ai.parseArticle(limitedString(body.get("originRequest"), 500, "originRequest"));
         Requests.PublicationSearch query = (Requests.PublicationSearch) parsed.get("draftQuery");
         Map<String, Object> data = new LinkedHashMap<>(parsed);
         data.put("advancedSearchParam", toLegacy(query));
@@ -60,7 +64,7 @@ public class LegacyController {
 
     @PostMapping("/api/aiFieldSearch/parseRequest")
     public Map<String, Object> parseScholar(@RequestBody Map<String, Object> body) {
-        Map<String, Object> parsed = ai.parseScholar(string(body.get("originRequest")));
+        Map<String, Object> parsed = ai.parseScholar(limitedString(body.get("originRequest"), 500, "originRequest"));
         Requests.ScholarSearch query = (Requests.ScholarSearch) parsed.get("draftQuery");
         Map<String, Object> data = new LinkedHashMap<>(parsed);
         data.put("fieldAuthorSearchParam", toLegacy(query));
@@ -80,7 +84,7 @@ public class LegacyController {
             case "year" -> "YEAR";
             default -> "RELEVANCE";
         };
-        request.page.size = integer(body.get("pageSize"), 20);
+        request.page.size = boundedInteger(body.get("pageSize"), 20, 1, 100, "pageSize");
         request.filters.yearStart = nullableInt(body.get("yearStart"));
         request.filters.yearEnd = nullableInt(body.get("yearEnd"));
         return request;
@@ -94,17 +98,18 @@ public class LegacyController {
         request.page = base.page;
         request.strictInstitution = bool(body.get("strictMode"), false);
         request.includeCoauthors = bool(body.get("expandMode"), true);
-        request.scanBatchSize = integer(body.get("scanBatchSize"), 100);
-        request.maxScanRounds = integer(body.get("maxScanRounds"), 5);
+        request.scanBatchSize = boundedInteger(body.get("scanBatchSize"), 100, 10, 500, "scanBatchSize");
+        request.maxScanRounds = boundedInteger(body.get("maxScanRounds"), 5, 1, 20, "maxScanRounds");
         return request;
     }
 
     private List<Requests.Condition> conditions(Object raw) {
         if (!(raw instanceof List<?> list)) return new ArrayList<>();
+        if (list.size() > 20) throw new IllegalArgumentException("articleSearchVO exceeds 20 conditions");
         List<Requests.Condition> result = new ArrayList<>();
         for (Object item : list) {
             Map<String, Object> row = map(item);
-            String value = string(row.get("value"));
+            String value = limitedString(row.get("value"), 100, "condition value");
             if (value.isBlank()) continue;
             int key = integer(row.get("key"), 3);
             Requests.Field field = switch (key) {
@@ -155,6 +160,16 @@ public class LegacyController {
     }
     private static String string(Object value) { return value == null ? "" : String.valueOf(value); }
     private static int integer(Object value, int fallback) { try { return Integer.parseInt(string(value)); } catch (Exception ignored) { return fallback; } }
+    private static int boundedInteger(Object value, int fallback, int min, int max, String field) {
+        int result = integer(value, fallback);
+        if (result < min || result > max) throw new IllegalArgumentException(field + " is out of range");
+        return result;
+    }
+    private static String limitedString(Object value, int maxLength, String field) {
+        String result = string(value);
+        if (result.length() > maxLength) throw new IllegalArgumentException(field + " is too long");
+        return result;
+    }
     private static Integer nullableInt(Object value) { String v = string(value); return v.isBlank() ? null : integer(v, 0); }
     private static boolean bool(Object value, boolean fallback) { return value == null ? fallback : Boolean.parseBoolean(string(value)); }
 }

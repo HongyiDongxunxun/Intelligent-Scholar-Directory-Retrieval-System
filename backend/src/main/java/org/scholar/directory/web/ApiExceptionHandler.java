@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.NoSuchElementException;
 
@@ -13,12 +14,21 @@ import java.util.NoSuchElementException;
 public class ApiExceptionHandler {
     @ExceptionHandler({IllegalArgumentException.class, MethodArgumentNotValidException.class})
     public ResponseEntity<ApiResponse<Void>> badRequest(Exception exception) {
-        return ResponseEntity.badRequest().body(ApiResponse.error("INVALID_ARGUMENT", safe(exception.getMessage())));
+        String message = exception instanceof MethodArgumentNotValidException
+                ? "Request validation failed."
+                : safe(exception.getMessage());
+        return ResponseEntity.badRequest().body(ApiResponse.error("INVALID_ARGUMENT", message));
     }
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ApiResponse<Void>> notFound(NoSuchElementException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error("NOT_FOUND", safe(exception.getMessage())));
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> routeNotFound() {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error("NOT_FOUND", "The requested API route was not found."));
     }
 
     @ExceptionHandler(Exception.class)

@@ -28,7 +28,9 @@ The reconstructed prototype supports:
 |-- experiments/                   E1-E3 experiment runner and published run
 |-- scripts/                       Build, start, and experiment helpers
 |-- docs/                          API examples and screenshot verification
+|-- private-materials/             Authenticated encrypted private-source bundle
 |-- CITATION.cff                   Citation metadata
+|-- SECURITY.md                    Exposure model and reporting policy
 |-- DATA_USE_NOTICE.md             Terms for experiment-derived data
 `-- LICENSE                        MIT license for reconstructed code
 ```
@@ -94,6 +96,8 @@ powershell -ExecutionPolicy Bypass -File ".\scripts\start_frontend.ps1"
 
 The frontend is available at `http://127.0.0.1:5174`; the backend health endpoint is `http://127.0.0.1:8091/actuator/health`.
 
+The backend binds only to loopback by default. A non-loopback address requires `API_ACCESS_TOKEN`, and any shared deployment must add TLS and proxy-level rate limits. See [`SECURITY.md`](SECURITY.md).
+
 ## Reproduce the reconstructed experiments
 
 Start the backend, then run:
@@ -136,6 +140,14 @@ Historical ranks retain the original deterministic tie order. Because public fea
 | Reconstructed-system performance | Yes, locally reproducible | Production SLA or long-term stability |
 
 The artifact supports verification of engineering feasibility and reported calculations. It does not establish production readiness, exhaustive retrieval quality, or general model accuracy.
+
+## Private build materials
+
+The original private database structure, runtime configurations, and Maven descriptor are stored in `private-materials/original-build-materials.isdenc`, encrypted with AES-256-GCM and a password that is not committed. They are not required by the public reconstruction.
+
+The tracked `backend/pom.xml` and `backend/src/main/resources/application.yml` are deliberately retained as sanitized, credential-free reproducibility templates. Encrypting or removing these public templates would make independent compilation impossible without improving confidentiality.
+
+Use `scripts/protect_private_materials.ps1` to create or restore a private bundle. Plaintext schemas, local/production configurations, private POM files, restored files, passwords, and key files are excluded by `.gitignore`.
 
 ## Citation
 

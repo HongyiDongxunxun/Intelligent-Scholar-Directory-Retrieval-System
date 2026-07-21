@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import java.util.*;
 
 @RestController
@@ -74,7 +76,9 @@ public class CoreController {
     }
 
     @GetMapping("/entities/{type}/{id}")
-    public ApiResponse<Map<String, Object>> entity(@PathVariable String type, @PathVariable String id) {
+    public ApiResponse<Map<String, Object>> entity(
+            @PathVariable @Pattern(regexp = "(?i)PUBLICATION|SCHOLAR|INSTITUTION|KEYWORD") String type,
+            @PathVariable @Size(min = 1, max = 64) @Pattern(regexp = "[A-Za-z0-9_-]+") String id) {
         String normalized = type.toUpperCase(Locale.ROOT);
         Map<String, Object> result = new LinkedHashMap<>();
         switch (normalized) {
@@ -124,11 +128,6 @@ public class CoreController {
                 "indexDocumentCount", count,
                 "indexVersion", "fixture-index-v1",
                 "dataMode", "SYNTHETIC"), meta());
-    }
-
-    @PostMapping("/system/cache/topic/clear")
-    public ApiResponse<Map<String, Object>> clearTopicCache() {
-        return ApiResponse.ok(Map.of("clearedEntries", topics.clearCache()), meta());
     }
 
     private Map<String, Object> meta() {

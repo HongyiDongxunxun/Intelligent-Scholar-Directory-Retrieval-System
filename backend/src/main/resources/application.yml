@@ -1,9 +1,23 @@
 server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
   port: ${SERVER_PORT:8091}
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+  max-http-request-header-size: 16KB
+  tomcat:
+    max-http-form-post-size: 64KB
+    max-swallow-size: 64KB
 
 spring:
   application:
     name: scholar-directory-reconstruction
+  mvc:
+    log-request-details: false
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
 
 management:
   endpoints:
@@ -18,3 +32,7 @@ app:
   data-version: synthetic-fixture-v1
   algorithm-version: topic-score-v1
   ai-parser-version: deterministic-parser-v1
+  legacy-api-enabled: ${LEGACY_API_ENABLED:false}
+  security:
+    api-token: ${API_ACCESS_TOKEN:}
+    max-request-bytes: ${MAX_REQUEST_BYTES:65536}
