@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "release_id": "D1CA42BDCC61E41CFC7880F3",
+  "package_type": "public_reviewer_verification_minimum",
+  "license_status": "PUBLIC_ACADEMIC_REVIEW_RELEASE_UNDER_INCLUDED_NOTICE",
+  "privacy": {
+    "random_ids_per_release": true,
+    "id_mapping_included": false,
+    "real_display_text_included": false,
+    "credentials_or_hosts_included": false,
+    "controlled_relationship_package_included": false
+  },
+  "counts": {
+    "e1": {
+      "feature_rows": 4992,
+      "ranking_rows": 24960,
+      "annotation_pool_rows": 168,
+      "feature_counts": {
+        "T001/author": 787,
+        "T001/keyword": 1175,
+        "T001/paper": 500,
+        "T001/unit": 212,
+        "T002/author": 774,
+        "T002/keyword": 934,
+        "T002/paper": 427,
+        "T002/unit": 183
+      },
+      "source_formula_mismatches": 0,
+      "source_to_public_rounding_adjustments": 332,
+      "public_score_order_rounding_adjustments": 53,
+      "unique_feature_vector_rows": 1074,
+      "unique_feature_vector_ratio": 0.215144,
+      "private_mapping_published": false
+    },
+    "e2": {
+      "records": 12,
+      "direct_confirm": 6,
+      "parse_confirm": 6
+    },
+    "e3": {
+      "historical_scenarios": 8,
+      "synthetic_measurements": 26
+    },
+    "synthetic_fixture": {
+      "publications": 60,
+      "scholars": 40,
+      "institutions": 20,
+      "top_level_institutions": 8,
+      "secondary_institutions": 12,
+      "keywords": 30,
+      "journals": 4,
+      "disciplines": 4,
+      "publication_scholar_edges": 120,
+      "publication_keyword_edges": 180,
+      "citation_edges": 80,
+      "missing_scholar_institutions": 4,
+      "same_name_scholars": 2,
+      "zero_citation_publications": 22,
+      "cross_topic_publications": 6,
+      "isolated_scholars": 1
+    }
+  },
+  "limitations": [
+    "E1 starts from normalized derived features and cannot validate source-database retrieval recall.",
+    "Historical E3 request-level samples are unavailable; synthetic measurements are clearly separated.",
+    "E2 covers two disclosed tasks with three repetitions each and is not a population accuracy study."
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "title": "E3 synthetic calculation fixture row",
+  "type": "object",
+  "required": [
+    "synthetic",
+    "run_id",
+    "scenario_code",
+    "concurrency",
+    "request_no",
+    "http_status",
+    "business_status",
+    "latency_ms",
+    "result_count",
+    "cache_status",
+    "timestamp_offset_ms"
+  ],
+  "properties": {
+    "synthetic": {
+      "const": true
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "scenario_code": {
+      "type": "string"
+    },
+    "concurrency": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "request_no": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "http_status": {
+      "type": "integer"
+    },
+    "business_status": {
+      "type": "string"
+    },
+    "latency_ms": {
+      "type": "number",
+      "minimum": 0
+    },
+    "result_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cache_status": {
+      "type": "string"
+    },
+    "timestamp_offset_ms": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

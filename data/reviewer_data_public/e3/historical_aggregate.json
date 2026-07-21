@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "experiment_date": "2026-07-11",
+  "snapshot_type": "historical_aggregate",
+  "raw_per_request_samples_available": false,
+  "provenance_note": "Aggregate values used in the paper; an incompatible later warm-cache run overwrote the earlier raw JSON.",
+  "sequential": {
+    "S01_ARTICLE_SEARCH": {
+      "count": 5,
+      "meanMs": 80.1,
+      "p50Ms": 63.2,
+      "observedP95Ms": 123.5,
+      "minMs": 43.7,
+      "maxMs": 123.5,
+      "successRate": 1.0,
+      "nonEmptyRate": 1.0
+    },
+    "S02_SCHOLAR_SEARCH": {
+      "count": 5,
+      "meanMs": 188.0,
+      "p50Ms": 178.5,
+      "observedP95Ms": 401.0,
+      "minMs": 69.0,
+      "maxMs": 401.0,
+      "successRate": 1.0,
+      "nonEmptyRate": 1.0
+    },
+    "S03_TOPIC_ASSEMBLY": {
+      "count": 5,
+      "meanMs": 123.9,
+      "p50Ms": 3.2,
+      "observedP95Ms": 607.6,
+      "minMs": 2.3,
+      "maxMs": 607.6,
+      "successRate": 1.0,
+      "nonEmptyRate": 1.0
+    },
+    "S04_AI_ARTICLE_PARSE": {
+      "count": 3,
+      "meanMs": 12741.9,
+      "p50Ms": 8510.3,
+      "observedP95Ms": 22661.0,
+      "minMs": 7054.5,
+      "maxMs": 22661.0,
+      "successRate": 1.0
+    },
+    "S05_AI_SCHOLAR_PARSE": {
+      "count": 3,
+      "meanMs": 7242.5,
+      "p50Ms": 7751.5,
+      "observedP95Ms": 8772.3,
+      "minMs": 5203.6,
+      "maxMs": 8772.3,
+      "successRate": 1.0
+    }
+  },
+  "concurrent": {
+    "S01_ARTICLE_SEARCH": [
+      {
+        "concurrency": 1,
+        "totalRequests": 4,
+        "meanMs": 128.9,
+        "observedP95Ms": 205.0,
+        "rps": 7.73,
+        "successRate": 1.0
+      },
+      {
+        "concurrency": 10,
+        "totalRequests": 20,
+        "meanMs": 57.8,
+        "observedP95Ms": 86.4,
+        "rps": 133.41,
+        "successRate": 1.0
+      },
+      {
+        "concurrency": 30,
+        "totalRequests": 60,
+        "meanMs": 139.1,
+        "observedP95Ms": 180.8,
+        "rps": 179.63,
+        "successRate": 1.0
+      }
+    ],
+    "S02_SCHOLAR_SEARCH": [
+      {
+        "concurrency": 1,
+        "totalRequests": 4,
+        "meanMs": 247.7,
+        "observedP95Ms": 302.9,
+        "rps": 4.03,
+        "successRate": 1.0
+      },
+      {
+        "concurrency": 10,
+        "totalRequests": 20,
+        "meanMs": 389.8,
+        "observedP95Ms": 1067.8,
+        "rps": 13.47,
+        "successRate": 1.0
+      },
+      {
+        "concurrency": 30,
+        "totalRequests": 60,
+        "meanMs": 1671.2,
+        "observedP95Ms": 3050.7,
+        "rps": 10.86,
+        "successRate": 1.0
+      }
+    ],
+    "S03_TOPIC_ASSEMBLY_WARM_CACHE": [
+      {
+        "concurrency": 1,
+        "totalRequests": 4,
+        "meanMs": 1.5,
+        "observedP95Ms": 2.1,
+        "rps": 530.21,
+        "successRate": 1.0
+      },
+      {
+        "concurrency": 10,
+        "totalRequests": 20,
+        "meanMs": 5.2,
+        "observedP95Ms": 9.3,
+        "rps": 1649.13,
+        "successRate": 1.0
+      },
+      {
+        "concurrency": 30,
+        "totalRequests": 60,
+        "meanMs": 13.6,
+        "observedP95Ms": 18.7,
+        "rps": 1843.68,
+        "successRate": 1.0
+      }
+    ]
+  },
+  "cache": {
+    "firstObservedMs": 607.6,
+    "repeatedSameParameterRangeMs": [
+      2.3,
+      3.8
+    ],
+    "warmMedianMs": 3.2,
+    "approximateFirstToWarmMedianRatio": 189.9,
+    "keyChangedCandidateLimit": 300,
+    "keyChangedMs": 5116.6,
+    "interpretation": "Concurrent topic-assembly values describe a pre-warmed same-parameter cache. Changing a key parameter triggered recomputation."
+  },
+  "process_snapshot": {
+    "workingSetMB": 423.6,
+    "privateMemoryMB": 500.6,
+    "threadCount": 122,
+    "cpuCumulativeSeconds": 17.078125,
+    "interpretation": "Single post-benchmark snapshot, not a time-series resource profile."
+  }
+}

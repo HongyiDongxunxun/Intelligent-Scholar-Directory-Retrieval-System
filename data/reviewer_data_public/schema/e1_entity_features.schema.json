@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "title": "E1 entity feature CSV row",
+  "type": "object",
+  "required": [
+    "topic_id",
+    "entity_type",
+    "entity_pid",
+    "rel",
+    "str",
+    "inf",
+    "full_score"
+  ],
+  "properties": {
+    "topic_id": {
+      "enum": [
+        "T001",
+        "T002"
+      ]
+    },
+    "entity_type": {
+      "enum": [
+        "paper",
+        "author",
+        "unit",
+        "keyword"
+      ]
+    },
+    "entity_pid": {
+      "type": "string",
+      "pattern": "^[PAUK]-[0-9A-F]{16}$"
+    },
+    "rel": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "str": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "inf": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "full_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}

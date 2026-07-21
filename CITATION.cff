@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software or reviewer dataset, please cite the associated paper."
+title: "Interactive Intelligent Scholar Directory Retrieval System"
+type: software
+authors:
+  - family-names: "Dong"
+    given-names: "Hongyi"
+  - family-names: "Zhou"
+    given-names: "Zuojian"
+  - family-names: "Chu"
+    given-names: "Yifan"
+  - family-names: "Jiang"
+    given-names: "Qilin"
+repository-code: "https://github.com/HongyiDongxunxun/Intelligent-Scholar-Directory-Retrieval-System"
+version: 0.1.0
+date-released: 2026-07-21
+preferred-citation:
+  type: article
+  title: "From Conceptual Vision to Prototype: Designing an Interactive Intelligent Scholar Directory Retrieval System for Chinese Humanities and Social Sciences"
+  authors:
+    - family-names: "Dong"
+      given-names: "Hongyi"
+    - family-names: "Zhou"
+      given-names: "Zuojian"
+    - family-names: "Chu"
+      given-names: "Yifan"
+    - family-names: "Jiang"
+      given-names: "Qilin"
+  year: 2026

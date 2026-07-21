@@ -1,0 +1,21 @@
+institution_id,display_name,parent_id,level
+SI001,Synthetic University 01,,1
+SI002,Synthetic University 02,,1
+SI003,Synthetic University 03,,1
+SI004,Synthetic University 04,,1
+SI005,Synthetic University 05,,1
+SI006,Synthetic University 06,,1
+SI007,Synthetic University 07,,1
+SI008,Synthetic University 08,,1
+SD001,Synthetic Department 01,SI001,2
+SD002,Synthetic Department 02,SI002,2
+SD003,Synthetic Department 03,SI003,2
+SD004,Synthetic Department 04,SI004,2
+SD005,Synthetic Department 05,SI005,2
+SD006,Synthetic Department 06,SI006,2
+SD007,Synthetic Department 07,SI007,2
+SD008,Synthetic Department 08,SI008,2
+SD009,Synthetic Department 09,SI001,2
+SD010,Synthetic Department 10,SI002,2
+SD011,Synthetic Department 11,SI003,2
+SD012,Synthetic Department 12,SI004,2

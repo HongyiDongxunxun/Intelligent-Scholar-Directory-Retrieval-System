@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "record_count": 12,
+  "privacy_note": "Requests, entity values, response entities, hosts, credentials, sessions, prompts, and raw logs were removed.",
+  "records": [
+    {
+      "case_id": "CASE-A",
+      "repeat_no": 1,
+      "stage": "direct_confirm",
+      "parser_config_version": null,
+      "parsed_field_codes": [
+        "KEYWORD"
+      ],
+      "year_start": 2015,
+      "year_end": 2025,
+      "exact_flags": {
+        "KEYWORD": null
+      },
+      "strict_mode": null,
+      "expand_mode": null,
+      "need_clarification": false,
+      "warning_codes": [],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 279,
+      "scanned_record_count": null,
+      "latency_ms": 55.2,
+      "latency_scope": "confirm_request"
+    },
+    {
+      "case_id": "CASE-A",
+      "repeat_no": 2,
+      "stage": "direct_confirm",
+      "parser_config_version": null,
+      "parsed_field_codes": [
+        "KEYWORD"
+      ],
+      "year_start": 2015,
+      "year_end": 2025,
+      "exact_flags": {
+        "KEYWORD": null
+      },
+      "strict_mode": null,
+      "expand_mode": null,
+      "need_clarification": false,
+      "warning_codes": [],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 279,
+      "scanned_record_count": null,
+      "latency_ms": 179.2,
+      "latency_scope": "confirm_request"
+    },
+    {
+      "case_id": "CASE-A",
+      "repeat_no": 3,
+      "stage": "direct_confirm",
+      "parser_config_version": null,
+      "parsed_field_codes": [
+        "KEYWORD"
+      ],
+      "year_start": 2015,
+      "year_end": 2025,
+      "exact_flags": {
+        "KEYWORD": null
+      },
+      "strict_mode": null,
+      "expand_mode": null,
+      "need_clarification": false,
+      "warning_codes": [],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 279,
+      "scanned_record_count": null,
+      "latency_ms": 45.2,
+      "latency_scope": "confirm_request"
+    },
+    {
+      "case_id": "CASE-A",
+      "repeat_no": 1,
+      "stage": "parse_confirm",
+      "parser_config_version": "archived-config-unspecified",
+      "parsed_field_codes": [
+        "SUBJECT"
+      ],
+      "year_start": 2015,
+      "year_end": 2025,
+      "exact_flags": {
+        "SUBJECT": true
+      },
+      "strict_mode": null,
+      "expand_mode": null,
+      "need_clarification": false,
+      "warning_codes": [
+        "PARSE_VARIATION_OBSERVED"
+      ],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 0,
+      "scanned_record_count": null,
+      "latency_ms": 8989.2,
+      "latency_scope": "parse_request_only"
+    },
+    {
+      "case_id": "CASE-A",
+      "repeat_no": 2,
+      "stage": "parse_confirm",
+      "parser_config_version": "archived-config-unspecified",
+      "parsed_field_codes": [
+        "KEYWORD"
+      ],
+      "year_start": 2014,
+      "year_end": 2024,
+      "exact_flags": {
+        "KEYWORD": false
+      },
+      "strict_mode": null,
+      "expand_mode": null,
+      "need_clarification": false,
+      "warning_codes": [
+        "PARSE_VARIATION_OBSERVED"
+      ],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 302,
+      "scanned_record_count": null,
+      "latency_ms": 8798.8,
+      "latency_scope": "parse_request_only"
+    },
+    {
+      "case_id": "CASE-A",
+      "repeat_no": 3,
+      "stage": "parse_confirm",
+      "parser_config_version": "archived-config-unspecified",
+      "parsed_field_codes": [
+        "KEYWORD"
+      ],
+      "year_start": 2015,
+      "year_end": 2025,
+      "exact_flags": {
+        "KEYWORD": true
+      },
+      "strict_mode": null,
+      "expand_mode": null,
+      "need_clarification": false,
+      "warning_codes": [
+        "PARSE_VARIATION_OBSERVED"
+      ],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 178,
+      "scanned_record_count": null,
+      "latency_ms": 14069.4,
+      "latency_scope": "parse_request_only"
+    },
+    {
+      "case_id": "CASE-B",
+      "repeat_no": 1,
+      "stage": "direct_confirm",
+      "parser_config_version": null,
+      "parsed_field_codes": [
+        "INSTITUTION",
+        "KEYWORD"
+      ],
+      "year_start": null,
+      "year_end": null,
+      "exact_flags": {
+        "INSTITUTION": null,
+        "KEYWORD": null
+      },
+      "strict_mode": true,
+      "expand_mode": true,
+      "need_clarification": false,
+      "warning_codes": [],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 73,
+      "scanned_record_count": 63,
+      "latency_ms": 55.4,
+      "latency_scope": "confirm_request"
+    },
+    {
+      "case_id": "CASE-B",
+      "repeat_no": 2,
+      "stage": "direct_confirm",
+      "parser_config_version": null,
+      "parsed_field_codes": [
+        "INSTITUTION",
+        "KEYWORD"
+      ],
+      "year_start": null,
+      "year_end": null,
+      "exact_flags": {
+        "INSTITUTION": null,
+        "KEYWORD": null
+      },
+      "strict_mode": true,
+      "expand_mode": true,
+      "need_clarification": false,
+      "warning_codes": [],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 73,
+      "scanned_record_count": 63,
+      "latency_ms": 62.0,
+      "latency_scope": "confirm_request"
+    },
+    {
+      "case_id": "CASE-B",
+      "repeat_no": 3,
+      "stage": "direct_confirm",
+      "parser_config_version": null,
+      "parsed_field_codes": [
+        "INSTITUTION",
+        "KEYWORD"
+      ],
+      "year_start": null,
+      "year_end": null,
+      "exact_flags": {
+        "INSTITUTION": null,
+        "KEYWORD": null
+      },
+      "strict_mode": true,
+      "expand_mode": true,
+      "need_clarification": false,
+      "warning_codes": [],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 73,
+      "scanned_record_count": 63,
+      "latency_ms": 98.6,
+      "latency_scope": "confirm_request"
+    },
+    {
+      "case_id": "CASE-B",
+      "repeat_no": 1,
+      "stage": "parse_confirm",
+      "parser_config_version": "archived-config-unspecified",
+      "parsed_field_codes": [
+        "INSTITUTION",
+        "KEYWORD"
+      ],
+      "year_start": null,
+      "year_end": null,
+      "exact_flags": {
+        "INSTITUTION": true,
+        "KEYWORD": true
+      },
+      "strict_mode": true,
+      "expand_mode": false,
+      "need_clarification": false,
+      "warning_codes": [
+        "PARSE_VARIATION_OBSERVED"
+      ],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 31,
+      "scanned_record_count": 55,
+      "latency_ms": 5145.0,
+      "latency_scope": "parse_request_only"
+    },
+    {
+      "case_id": "CASE-B",
+      "repeat_no": 2,
+      "stage": "parse_confirm",
+      "parser_config_version": "archived-config-unspecified",
+      "parsed_field_codes": [
+        "INSTITUTION",
+        "KEYWORD"
+      ],
+      "year_start": null,
+      "year_end": null,
+      "exact_flags": {
+        "INSTITUTION": true,
+        "KEYWORD": false
+      },
+      "strict_mode": false,
+      "expand_mode": true,
+      "need_clarification": false,
+      "warning_codes": [
+        "PARSE_VARIATION_OBSERVED"
+      ],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 112,
+      "scanned_record_count": 60,
+      "latency_ms": 4075.6,
+      "latency_scope": "parse_request_only"
+    },
+    {
+      "case_id": "CASE-B",
+      "repeat_no": 3,
+      "stage": "parse_confirm",
+      "parser_config_version": "archived-config-unspecified",
+      "parsed_field_codes": [
+        "INSTITUTION",
+        "KEYWORD"
+      ],
+      "year_start": null,
+      "year_end": null,
+      "exact_flags": {
+        "INSTITUTION": true,
+        "KEYWORD": true
+      },
+      "strict_mode": true,
+      "expand_mode": true,
+      "need_clarification": false,
+      "warning_codes": [
+        "PARSE_VARIATION_OBSERVED"
+      ],
+      "http_status": 200,
+      "business_status": "2000",
+      "result_count": 67,
+      "scanned_record_count": 55,
+      "latency_ms": 4254.2,
+      "latency_scope": "parse_request_only"
+    }
+  ]
+}

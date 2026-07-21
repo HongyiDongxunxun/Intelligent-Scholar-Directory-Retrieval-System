@@ -1,44 +1,72 @@
-# 交互式学者智能目录：公开验证重构版
+# Interactive Intelligent Scholar Directory Retrieval System
 
-本仓库是依据论文描述、实验报告和重构文档重新实现的可运行原型。它保留结构化文献检索、学者发现、跨实体专题装配、证据回溯和自然语言解析确认链路，但不包含原系统前后端代码、原始数据库、真实学者实体、账号或密钥。
+This repository is the research artifact for the paper *From Conceptual Vision to Prototype: Designing an Interactive Intelligent Scholar Directory Retrieval System for Chinese Humanities and Social Sciences*.
 
-## 数据边界
+It provides a confidentiality-preserving reconstruction of the system, a runnable synthetic fixture, de-identified experiment-derived data, reproducibility scripts, API examples, and archived experiment evidence. It does **not** contain the original production source code, raw bibliographic database, real scholar profiles, credentials, or anonymization crosswalks.
 
-- 运行时由固定种子代码生成 60 篇合成文献、40 名合成学者和 20 个合成机构。
-- 所有名称均带“合成”标识，数据不来源于原数据库，也不连接 MySQL 或 Elasticsearch。
-- 后端索引状态将 `dataMode` 明确标记为 `SYNTHETIC`。
-- 论文中的 915/1,473/323 及历史性能数据仅为历史环境快照，不是本系统的验收常量。
+## Artifact scope
 
-## 技术栈
+The reconstructed prototype supports:
 
-- 后端：Java 17+、Spring Boot 2.7.14、Maven
-- 前端：Vue 3、Vite、Lucide
-- 实验：Python 3 标准库，无额外依赖
+- structured publication retrieval and scholar discovery;
+- cross-entity topic assembly for publications, scholars, institutions, and keywords;
+- auditable `Rel`, `Str`, and `Inf` scoring components;
+- evidence navigation from ranked entities to supporting publications;
+- deterministic natural-language parse-and-confirm workflows;
+- repeatable functional, ranking, cache, and lightweight performance experiments.
 
-## 快速启动
+## Repository structure
 
-分别在两个 PowerShell 窗口中执行：
-
-```powershell
-Set-Location -LiteralPath "<repository-directory>"
-powershell -ExecutionPolicy Bypass -File ".\scripts\start_backend.ps1"
+```text
+.
+|-- backend/                       Spring Boot API and integration tests
+|-- frontend/                      Vue 3 interactive interface
+|-- data/
+|   |-- synthetic-fixture-manifest.json
+|   |-- reviewer_data_public/      De-identified reviewer dataset
+|   `-- reviewer_data_public.zip   Submission-ready data archive
+|-- experiments/                   E1-E3 experiment runner and published run
+|-- scripts/                       Build, start, and experiment helpers
+|-- docs/                          API examples and screenshot verification
+|-- CITATION.cff                   Citation metadata
+|-- DATA_USE_NOTICE.md             Terms for experiment-derived data
+`-- LICENSE                        MIT license for reconstructed code
 ```
 
-```powershell
-Set-Location -LiteralPath "<repository-directory>"
-powershell -ExecutionPolicy Bypass -File ".\scripts\start_frontend.ps1"
-```
+## Data layers
 
-随后访问：
+This repository deliberately separates two data layers.
 
-- 前端：`http://127.0.0.1:5174`
-- 后端：`http://127.0.0.1:8091`
-- 健康检查：`http://127.0.0.1:8091/actuator/health`
-- 索引状态：`http://127.0.0.1:8091/api/v1/system/index-status`
+### Synthetic system fixture
 
-在对应窗口按 `Ctrl+C` 停止服务。
+The running application generates a deterministic fixture containing 60 fictional publications, 40 fictional scholars, and 20 fictional institutions. It is used only to exercise application behavior, edge cases, ranking logic, caching, and interfaces. The backend reports `dataMode = SYNTHETIC`.
 
-## 构建与测试
+### De-identified experiment-derived data
+
+[`data/reviewer_data_public/`](data/reviewer_data_public/) contains the minimum real experiment-derived evidence needed for reviewer verification:
+
+| Evidence | Size | Verification purpose |
+|---|---:|---|
+| E1 normalized entity features | 4,992 rows | Recalculate score formulas across two anonymous topics and four entity types |
+| E1 expected rankings | 24,960 rows | Verify five ranking methods |
+| E1 annotation-pool structure | 168 rows | Verify Top-10 pooling without claiming completed relevance labels |
+| E2 sanitized repeated outcomes | 12 records | Compare direct-confirm and parse-confirm behavior |
+| E3 historical aggregate | 8 scenarios | Audit the aggregate values used in the paper |
+| E3 synthetic calculation fixture | 26 measurements | Test Mean, P50, observed P95, RPS, and cache calculations |
+
+The public data remove titles, names, institution labels, keyword text, source identifiers, request entities, hosts, credentials, prompts, sessions, and raw logs. Public entity IDs are random within this release, and no mapping back to the confidential database is included.
+
+The directory also contains a fully synthetic relational fixture with 60 publications, 40 scholars, 20 institutions, 30 keywords, and 380 relationship rows. Historical and synthetic evidence are explicitly marked and must not be conflated.
+
+## Requirements
+
+- Java 17 or later
+- Maven 3.8 or later
+- Node.js 18 or later
+- npm
+- Python 3.10 or later for experiments and data validation
+
+## Build and test
 
 ```powershell
 Set-Location -LiteralPath ".\backend"
@@ -50,26 +78,71 @@ npm.cmd install
 npm.cmd run build
 ```
 
-后端集成测试覆盖合成索引一致性、文献与学者证据、专题公式与缓存、AI 解析确认闭环。
+The backend integration suite checks synthetic index consistency, publication and scholar evidence, topic-score formulas and caching, and the parse-confirm workflow.
 
-## 复现实验
+## Run the prototype
 
-先启动后端，再运行：
+Open two PowerShell windows at the repository root.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\scripts\start_backend.ps1"
+```
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\scripts\start_frontend.ps1"
+```
+
+The frontend is available at `http://127.0.0.1:5174`; the backend health endpoint is `http://127.0.0.1:8091/actuator/health`.
+
+## Reproduce the reconstructed experiments
+
+Start the backend, then run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File ".\scripts\run_experiments.ps1" -Workers 30 -Requests 60
 ```
 
-每次运行会创建新的 `experiments/results/<run-id>/`，包含环境、请求、响应、测量、摘要、Markdown 报告和 SHA-256 校验和。合成实验只证明链路可执行、评分可审计和性能可测量，不支持检索质量优越性或生产就绪结论。
+Each run creates `experiments/results/<run-id>/` with a manifest, environment summary, requests, responses, measurements, aggregate results, report, and SHA-256 checksums. The tracked reference run is under [`experiments/results/published/`](experiments/results/published/).
 
-## 目录
+## Validate the reviewer data
 
-```text
-new_sys/
-|-- backend/       Spring Boot API、合成数据和集成测试
-|-- frontend/      Vue 操作界面
-|-- data/          公开验证数据清单
-|-- experiments/   E1/E2/E3 单文件运行器
-|-- scripts/       构建、启动和停止脚本
-`-- docs/          实现说明与接口示例
+From the repository root:
+
+```powershell
+python data/reviewer_data_public/scripts/validate_package.py data/reviewer_data_public
+python data/reviewer_data_public/scripts/calculate_e3.py data/reviewer_data_public/e3/calculation_fixture.jsonl
+python -B -m unittest discover -s data/reviewer_data_public/tests -p "test_*.py"
 ```
+
+Expected package checks include:
+
+- 4,992 E1 feature rows;
+- 24,960 ranking rows;
+- 168 pooled entities;
+- 12 sanitized E2 records;
+- 26 synthetic E3 calculation rows;
+- zero direct-identifier findings and zero mapping files.
+
+Historical ranks retain the original deterministic tie order. Because public features are displayed to four decimal places, the package records 332 score-rounding adjustments and 53 rank-order comparisons that differ only within `0.0001`. These are documented rather than silently removed.
+
+## Reproducibility boundary
+
+| Claim | Supported by this repository | Outside the artifact boundary |
+|---|---|---|
+| Score formulas and ranking implementations | Yes | Original retrieval recall |
+| Topic assembly and evidence navigation | Yes, with synthetic entities | Identity of confidential entities |
+| E2 repeat outcomes | Yes, as sanitized archived records | Population-level model accuracy |
+| Historical E3 aggregate interpretation | Yes | Lost historical per-request samples |
+| Reconstructed-system performance | Yes, locally reproducible | Production SLA or long-term stability |
+
+The artifact supports verification of engineering feasibility and reported calculations. It does not establish production readiness, exhaustive retrieval quality, or general model accuracy.
+
+## Citation
+
+Use the metadata in [`CITATION.cff`](CITATION.cff). Add the final publication venue, volume, pages, and DOI after acceptance.
+
+## License and data use
+
+The reconstructed source code is released under the [MIT License](LICENSE). De-identified experiment-derived data are governed separately by [`DATA_USE_NOTICE.md`](DATA_USE_NOTICE.md), including attribution, non-commercial academic use, and a prohibition on re-identification. No rights to the confidential source database, original system, or unpublished identity mappings are granted.
+
+Questions about reproducibility can be submitted through the repository's GitHub Issues page.

@@ -1,0 +1,6 @@
+* text=auto
+
+# Force stable LF bytes so published SHA-256 checksums remain valid on all OSes.
+data/reviewer_data_public/** text eol=lf
+*.zip binary
+*.png binary

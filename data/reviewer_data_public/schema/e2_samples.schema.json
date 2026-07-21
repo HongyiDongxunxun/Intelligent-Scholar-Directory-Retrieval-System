@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "title": "E2 sanitized sample",
+  "type": "object",
+  "required": [
+    "case_id",
+    "repeat_no",
+    "stage",
+    "parsed_field_codes",
+    "http_status",
+    "business_status",
+    "result_count",
+    "latency_ms"
+  ],
+  "properties": {
+    "case_id": {
+      "enum": [
+        "CASE-A",
+        "CASE-B"
+      ]
+    },
+    "repeat_no": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3
+    },
+    "stage": {
+      "enum": [
+        "direct_confirm",
+        "parse_confirm"
+      ]
+    },
+    "parser_config_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parsed_field_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "year_start": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "year_end": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "exact_flags": {
+      "type": "object"
+    },
+    "strict_mode": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "expand_mode": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "need_clarification": {
+      "type": "boolean"
+    },
+    "warning_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "http_status": {
+      "type": "integer"
+    },
+    "business_status": {
+      "type": "string"
+    },
+    "result_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "scanned_record_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "latency_ms": {
+      "type": "number",
+      "minimum": 0
+    },
+    "latency_scope": {
+      "type": "string"
+    }
+  }
+}

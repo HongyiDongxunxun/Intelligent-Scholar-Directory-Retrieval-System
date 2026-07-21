@@ -1,0 +1,28 @@
+{
+  "status": "pass",
+  "direct_identifier_scan_findings": 0,
+  "credential_or_host_scan_findings": 0,
+  "id_mapping_present": false,
+  "e1": {
+    "feature_rows": 4992,
+    "ranking_rows": 24960,
+    "annotation_pool_rows": 168,
+    "feature_counts": {
+      "T001/author": 787,
+      "T001/keyword": 1175,
+      "T001/paper": 500,
+      "T001/unit": 212,
+      "T002/author": 774,
+      "T002/keyword": 934,
+      "T002/paper": 427,
+      "T002/unit": 183
+    },
+    "source_formula_mismatches": 0,
+    "source_to_public_rounding_adjustments": 332,
+    "public_score_order_rounding_adjustments": 53,
+    "unique_feature_vector_rows": 1074,
+    "unique_feature_vector_ratio": 0.215144,
+    "private_mapping_published": false
+  },
+  "linkage_risk_note": "Normalized feature vectors may be distinctive. This residual risk is disclosed; relationship-level and raw bibliographic data remain excluded."
+}
